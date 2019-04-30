@@ -1,0 +1,97 @@
+body {
+  margin: 0 1em;
+  font-family: sans-serif;
+}
+
+#content {
+  max-width: 50em;
+  margin: 2em auto;
+}
+
+* {
+  font-size: 18px;
+  line-height: 1.6em;
+  box-sizing: border-box;
+}
+
+p > img,
+p > a > img {
+  border: 2px solid black;
+  width: 100%;
+}
+
+.card {
+  border: 0;
+  margin: 5px auto;
+  display: flex;
+}
+
+.card .card-body {
+  z-index: 2;
+  margin-top: -1rem;
+  background-color: #fff;
+  width: 80%;
+  position: relative;
+}
+
+.card .card-image {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.card .card-image > a > h3 {
+  margin-left: 0;
+  padding: .5rem 1rem;
+  margin-top: 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: rgba(60, 48, 48, 0.6);
+  color: #d6e3df;
+  font-size: 1.5em;
+  transition: all 0.5s ease;
+  transform: translateX(-100%);
+  border-radius: 0 15px 0 0;
+}
+
+.card .card-image img {
+  position: relative;
+  opacity: 1;
+  width: 100%;
+  opacity: 0.85;
+  transition: 0.5s ease;
+}
+
+.card:hover img {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.card:hover .card-image > a >h3 {
+  transform: translateX(0%);
+}
+
+.card .card-body,
+.card .card-image {
+  border-radius: 5px;
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+.card .card-badge-left {
+  position: absolute;
+  z-index: 3;
+  margin-top: 5px;
+}
+
+.card .card-badge-left .badge {
+  border-radius: 0;
+  color: #f37272;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px;
+}
+
+.card .bottom {
+  float: right;
+}

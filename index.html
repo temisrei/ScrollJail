@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-Hant-TW" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="zh-Hant-TW" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="zh-Hant-TW">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+<head>
+  <meta charset="utf-8" />
+  <title>使用者登入</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <!-- BEGIN GLOBAL STYLES -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- END THEME LAYOUT STYLES -->
+  <link rel="shortcut icon" href="https://wac.kmu.edu.tw/assets/favicon.png" />
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="content">
+
+<!-- here -->
+<div class="mx-auto col-md-10">
+  <div class="card">
+    <div class="card-image">
+      <a href="#">
+        <h3>高雄醫學大學 校務資訊系統 2.0</h3>
+        <img class="card-img-top img-fluid" src="/images/ilovekmu_banner.jpg" alt="Card image cap">
+      </a>
+    </div>
+    <div class="card-body mx-auto">
+      <h5 class="card-title">2019-04-30 校內公告事項</h5>
+      <p class="card-text">校務資訊系統(WAC) 與 網頁信件系統(Roundcube) 系統整合介接</p>
+      <p class="card-text">
+        <p>高雄醫學大學資訊服務入口 採 單一登入 SSO, Single Sign-on 機制，相關服務例如：</p>
+        <ul>
+          <li>校務資訊系統 WAC</li>
+          <li>電子郵件收發 Webmail</li>
+          <li>電子郵件過濾 Spam Filter</li>
+          <li>圖書館自動化系統 Library Catalog</li>
+          <li>軟體下載 Software Download</li>
+          <li>即時反饋系統 IRS</li>
+        </ul>
+        <small class="text-muted">距離上次更新為 3 小時前</small>
+      </p>
+      <a href="#" class="btn btn-primary bottom">協助測試登入</a>
+    </div>
+  </div>
+</div>
+
+<div id="fakeurlbar" style="display: none; position: fixed; top: 0px; left: 0; height: 74.77037037037037px; width: 100vw; background-image: url('/images/bar_background.png'); background-size: 19px 74.77037037037037px;">
+  <img src="/images/bar_left_wac.png" style="float: left; width: 211.72222222222223px;" />
+  <img src="/images/bar_right.png" style="float: right;  width: 124.74444444444444px;" />
+</div>
+
+
+    <script>
+      let scrollJailEl = null;
+      const initialHeight = window.innerHeight;
+      const fakeUrlBarEl = document.getElementById("fakeurlbar");
+      const fakeTopHeight = 200;
+      document.body.appendChild(fakeUrlBarEl);
+      window.onresize = function () {
+        if (window.innerHeight > initialHeight && !scrollJailEl) {
+          // Chrome has given up its URL bar!
+          // Create the scroll jail and the fake URL bar!
+          const jailScrollTo = window.scrollY;
+          fakeUrlBarEl.style.display = "block";
+          document.body.style.margin = "0";
+          scrollJailEl = document.createElement("div");
+          scrollJailEl.style.position = "fixed";
+          scrollJailEl.style.overflowX = "scroll";
+          scrollJailEl.style.overflowY = "scroll";
+          scrollJailEl.style.width = window.innerWidth + "px";
+          scrollJailEl.style.height = window.innerHeight + "px";
+          scrollJailEl.style.top = "56px";
+          scrollJailEl.style.padding = "0 1em";
+          // create the fake top
+          const fakeTopEl = document.createElement("div");
+          fakeTopEl.style.height = fakeTopHeight + "px";
+          scrollJailEl.appendChild(fakeTopEl);
+          // move everything into the scroll jail
+          while (document.body.children.length > 0) {
+            const child = document.body.children[0];
+            scrollJailEl.appendChild(child);
+          }
+          document.body.appendChild(scrollJailEl);
+          document.body.appendChild(fakeUrlBarEl);
+          scrollJailEl.scrollTop = jailScrollTo + fakeTopHeight + 56;
+          let scroller;
+          scrollJailEl.onscroll = e => {
+            clearTimeout(scroller);
+            scroller = setTimeout(() => {
+              // We stopped scrolling. Reset the jail.
+              scrollJailEl.scrollTo({
+                top: Math.max(scrollJailEl.scrollTop, fakeTopHeight),
+                left: 0,
+                behavior: 'smooth'
+              });
+            }, 100);
+            console.log("scroll");
+          };
+        }
+      };
+    </script>
+  </div>
+</body>
+
+</html>
